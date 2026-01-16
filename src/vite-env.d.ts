@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
-declare module 'gsap-trial/SplitText';
-declare module 'gsap-trial/ScrollSmoother';
+declare module 'gsap/SplitText';
+declare module 'gsap/ScrollSmoother';
 
 interface ImportMetaEnv {
   readonly VITE_GROQ_API_KEY: string;

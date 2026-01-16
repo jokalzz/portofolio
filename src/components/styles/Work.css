@@ -96,14 +96,7 @@
 }
 .work-image-in {
   position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: inline-block;
-  will-change: transform;
-}
-.work-image-in.work-image-hovered {
-  transform: scale(2);
-  z-index: 10;
-  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.5);
 }
 .work-link {
   position: absolute;

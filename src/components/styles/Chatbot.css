@@ -1,7 +1,7 @@
 .chatbot-container {
   position: fixed;
-  bottom: 100px;
-  right: 100px;
+  bottom: 20px;
+  right: 20px;
   z-index: 99999;
   font-family: inherit;
 }

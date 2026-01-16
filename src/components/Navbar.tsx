@@ -31,26 +31,39 @@ const Navbar = () => {
           e.preventDefault();
           let elem = e.currentTarget as HTMLAnchorElement;
           let section = elem.getAttribute("data-href");
-          smoother.scrollTo(section, true, "top top");
+          
+          // Direct approach: use string selector with smoother
+          if (section) {
+            smoother.scrollTo(section, true, "top top");
+          }
         }
       });
     });
+    
+    // Refresh on resize
     window.addEventListener("resize", () => {
-      ScrollSmoother.refresh(true);
+      ScrollTrigger.refresh();
+    });
+    
+    // Refresh after all content loaded
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 100);
     });
   }, []);
   return (
     <>
       <div className="header">
         <a href="/#" className="navbar-title" data-cursor="disable">
-          Logo
+          JoKa
         </a>
         <a
-          href="mailto:example@mail.com"
+          href="mailto:jokakalzz@gmail.com"
           className="navbar-connect"
           data-cursor="disable"
         >
-          example@mail.com
+          jokakalzz@gmail.com
         </a>
         <ul>
           <li>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { MdArrowOutward } from "react-icons/md";
 
 interface Props {
@@ -11,7 +11,14 @@ interface Props {
 const WorkImage = (props: Props) => {
   const [isVideo, setIsVideo] = useState(false);
   const [video, setVideo] = useState("");
+  const [isHovered, setIsHovered] = useState(false);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   const handleMouseEnter = async () => {
+    hoverTimeoutRef.current = setTimeout(() => {
+      setIsHovered(true);
+    }, 500);
+
     if (props.video) {
       setIsVideo(true);
       const response = await fetch(`src/assets/${props.video}`);
@@ -21,13 +28,22 @@ const WorkImage = (props: Props) => {
     }
   };
 
+  const handleMouseLeave = () => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+    setIsHovered(false);
+    setIsVideo(false);
+  };
+
   return (
     <div className="work-image">
       <a
-        className="work-image-in"
+        className={`work-image-in ${isHovered ? 'work-image-hovered' : ''}`}
         href={props.link}
         onMouseEnter={handleMouseEnter}
-        onMouseLeave={() => setIsVideo(false)}
+        onMouseLeave={handleMouseLeave}
         target="_blank"
         data-cursor={"disable"}
       >

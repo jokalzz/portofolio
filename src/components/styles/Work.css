@@ -11,6 +11,8 @@
   height: 100vh;
   box-sizing: border-box;
   will-change: transform;
+  background-color: var(--backgroundColor);
+  padding-bottom: 100px;
 }
 .work-container {
   margin: auto;
@@ -18,6 +20,7 @@
   flex-direction: column;
   height: 100%;
   align-content: stretch;
+  padding-right: 100px;
 }
 .work-flex {
   width: 100%;
@@ -89,9 +92,18 @@
   display: flex;
   width: 100%;
   justify-content: center;
+  overflow: visible;
 }
 .work-image-in {
   position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: inline-block;
+  will-change: transform;
+}
+.work-image-in.work-image-hovered {
+  transform: scale(2);
+  z-index: 10;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.5);
 }
 .work-link {
   position: absolute;
@@ -207,4 +219,13 @@
   .work-flex {
     height: auto;
   }
+}
+
+.work-spacer {
+  height: 1px;
+  width: 100%;
+  background: var(--backgroundColor);
+  display: block;
+  position: relative;
+  z-index: 50;
 }

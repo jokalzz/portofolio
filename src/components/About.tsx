@@ -6,9 +6,7 @@ const About = () => {
       <div className="about-me">
         <h3 className="title">About Me</h3>
         <p className="para">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quis
-          dolores numquam iusto Ratione earum ducimus autem id iure pariatur
-          dolorum quae maiores.
+          Computer Engineering student at Sam Ratulangi University (Class of 2023) with a strong interest in Machine Learning and Full Stack Web Development, complemented by a passion for UI/UX design and creative editing.
         </p>
       </div>
     </div>

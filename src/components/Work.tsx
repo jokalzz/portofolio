@@ -1,10 +1,7 @@
 import "./styles/Work.css";
 import WorkImage from "./WorkImage";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(useGSAP);
+import { useState, useRef, useEffect } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 // Data untuk setiap project - isi sesuai kebutuhan Anda
 const projectsData = [
@@ -51,71 +48,137 @@ const projectsData = [
 ];
 
 const Work = () => {
-  useGSAP(() => {
-  let translateX: number = 0;
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
 
-  function setTranslateX() {
-    const box = document.getElementsByClassName("work-box");
-    const rectLeft = document
-      .querySelector(".work-container")!
-      .getBoundingClientRect().left;
-    const rect = box[0].getBoundingClientRect();
-    const parentWidth = box[0].parentElement!.getBoundingClientRect().width;
-    let padding: number =
-      parseInt(window.getComputedStyle(box[0]).padding) / 2;
-    translateX = rect.width * box.length - (rectLeft + parentWidth) + padding;
-  }
+  const totalSlides = projectsData.length;
 
-  setTranslateX();
-
-  let timeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".work-section",
-      start: "top top",
-      end: `+=${translateX}`,
-      scrub: true,
-      pin: true,
-      pinSpacing: true,
-      id: "work",
-      invalidateOnRefresh: true,
-    },
-  });
-
-  timeline.to(".work-flex", {
-    x: -translateX,
-    ease: "none",
-  });
-
-  // Clean up (optional, good practice)
-  return () => {
-    timeline.kill();
-    ScrollTrigger.getById("work")?.kill();
+  const goToPrevious = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentIndex((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
+    setTimeout(() => setIsAnimating(false), 500);
   };
-}, []);
+
+  const goToNext = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentIndex((prev) => (prev === totalSlides - 1 ? 0 : prev + 1));
+    setTimeout(() => setIsAnimating(false), 500);
+  };
+
+  const goToSlide = (index: number) => {
+    if (isAnimating || index === currentIndex) return;
+    setIsAnimating(true);
+    setCurrentIndex(index);
+    setTimeout(() => setIsAnimating(false), 500);
+  };
+
+  // Touch handlers for swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const diff = touchStartX.current - touchEndX.current;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        goToNext();
+      } else {
+        goToPrevious();
+      }
+    }
+  };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") goToPrevious();
+      if (e.key === "ArrowRight") goToNext();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isAnimating]);
+
   return (
     <div className="work-section" id="work">
       <div className="work-container section-container">
         <h2>
           My <span>Work</span>
         </h2>
-        <div className="work-flex">
-          {projectsData.map((project, index) => (
-            <div className="work-box" key={project.id}>
-              <div className="work-info">
-                <div className="work-title">
-                  <h3>0{index + 1}</h3>
+        
+        <div 
+          className="work-carousel"
+          ref={carouselRef}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          {/* Navigation Buttons */}
+          <button 
+            className="carousel-btn carousel-btn-left" 
+            onClick={goToPrevious}
+            aria-label="Previous project"
+          >
+            <FaChevronLeft />
+          </button>
+          
+          <button 
+            className="carousel-btn carousel-btn-right" 
+            onClick={goToNext}
+            aria-label="Next project"
+          >
+            <FaChevronRight />
+          </button>
 
-                  <div>
-                    <h4>{project.title}</h4>
-                    <p>{project.category}</p>
+          {/* Carousel Track */}
+          <div 
+            className="work-flex"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
+            {projectsData.map((project, index) => (
+              <div className="work-box" key={project.id}>
+                <div className="work-info">
+                  <div className="work-title">
+                    <h3>0{index + 1}</h3>
+                    <div>
+                      <h4>{project.title}</h4>
+                      <p>{project.category}</p>
+                    </div>
                   </div>
+                  <h4>Tools and features</h4>
+                  <p>{project.tools}</p>
                 </div>
-                <h4>Tools and features</h4>
-                <p>{project.tools}</p>
+                <WorkImage image={project.image} alt={project.title} link={project.link} />
               </div>
-              <WorkImage image={project.image} alt={project.title} link={project.link} />
-            </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Dots Indicator */}
+        <div className="carousel-dots">
+          {projectsData.map((_, index) => (
+            <button
+              key={index}
+              className={`carousel-dot ${index === currentIndex ? "active" : ""}`}
+              onClick={() => goToSlide(index)}
+              aria-label={`Go to project ${index + 1}`}
+            />
           ))}
+        </div>
+
+        {/* Counter */}
+        <div className="carousel-counter">
+          <span className="current">{String(currentIndex + 1).padStart(2, '0')}</span>
+          <span className="separator">/</span>
+          <span className="total">{String(totalSlides).padStart(2, '0')}</span>
         </div>
       </div>
     </div>

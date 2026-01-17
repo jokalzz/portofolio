@@ -208,9 +208,75 @@
 @media only screen and (max-width: 1025px) {
   .work-container {
     align-content: normal;
+    padding-right: 0;
   }
   .work-flex {
     height: auto;
+    margin-left: 0;
+    padding-right: 0;
+    flex-direction: column;
+  }
+  .work-box {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #363636;
+    padding: 40px 20px;
+  }
+  .work-section h2 {
+    font-size: 45px;
+    margin-top: 50px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .work-section h2 {
+    font-size: 35px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  .work-title h3 {
+    font-size: 28px;
+    line-height: 32px;
+  }
+  .work-info h4 {
+    font-size: 14px;
+  }
+  .work-info p {
+    font-size: 12px;
+    width: 100%;
+  }
+  .work-box {
+    padding: 30px 15px;
+    gap: 30px;
+  }
+  .work-image img {
+    max-height: 200px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .work-section h2 {
+    font-size: 28px;
+    margin-top: 30px;
+  }
+  .work-title {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  .work-title > div {
+    text-align: left;
+  }
+  .work-title h3 {
+    font-size: 24px;
+    line-height: 28px;
+  }
+  .work-box {
+    padding: 25px 10px;
+    gap: 25px;
+  }
+  .work-image img {
+    max-height: 180px;
   }
 }
 

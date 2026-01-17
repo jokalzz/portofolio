@@ -45,6 +45,19 @@
   font-size: 14px;
   letter-spacing: 0.2px;
 }
+@media only screen and (max-width: 499px) {
+  .header {
+    padding: 15px 0px;
+    margin-bottom: -70px;
+  }
+  .header ul {
+    font-size: 11px;
+    row-gap: 6px;
+  }
+  .navbar-title {
+    font-size: 13px;
+  }
+}
 @media only screen and (min-width: 500px) {
   .header {
     padding: 20px 0px;

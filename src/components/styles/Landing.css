@@ -244,6 +244,44 @@ h2.landing-info-h2 {
   top: 0;
   left: 0;
 }
+@media screen and (max-width: 499px) {
+  .landing-intro {
+    top: 15%;
+    width: calc(100% - 30px);
+  }
+  .landing-intro h2 {
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+  .landing-intro h1 {
+    font-size: 24px;
+    line-height: 26px;
+  }
+  .landing-info {
+    bottom: 30px;
+    width: calc(100% - 30px);
+  }
+  .landing-info h3 {
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+  .landing-info h2 {
+    font-size: 28px;
+    line-height: 32px;
+    margin-left: 10px;
+  }
+  h2.landing-info-h2 {
+    font-size: 32px;
+  }
+  .character-model {
+    height: 70vh;
+    bottom: 30px;
+  }
+  .landing-circle1 {
+    width: 200px;
+    height: 200px;
+  }
+}
 @media screen and (min-width: 500px) {
   .landing-circle2 {
     display: block;

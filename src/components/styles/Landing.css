@@ -183,6 +183,275 @@
    font-weight: 200; 
 } */
 
+/* CV Button Styles */
+.cv-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--accentColor) 0%, #b366ff 100%);
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(251, 141, 255, 0.3);
+  z-index: 100;
+  font-family: inherit;
+  pointer-events: auto;
+}
+
+.cv-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.cv-button:hover::before {
+  left: 100%;
+}
+
+.cv-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(251, 141, 255, 0.5);
+}
+
+.cv-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(251, 141, 255, 0.4);
+}
+
+.cv-button-text {
+  position: relative;
+  z-index: 1;
+}
+
+.cv-button-icon {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cv-button:hover .cv-button-icon {
+  transform: translate(3px, -3px);
+}
+
+/* CV Modal Styles */
+.cv-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.cv-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: 90vh;
+  max-height: 900px;
+  background: #1a1a1a;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 80px rgba(251, 141, 255, 0.25), 0 0 0 1px rgba(251, 141, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  animation: modalSlideUp 0.3s ease-out;
+}
+
+@keyframes modalSlideUp {
+  from {
+    transform: translateY(30px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.cv-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: rgba(251, 141, 255, 0.1);
+  border-bottom: 1px solid rgba(251, 141, 255, 0.15);
+}
+
+.cv-modal-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.cv-modal-close {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: #fff;
+}
+
+.cv-modal-close:hover {
+  background: rgba(251, 141, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+.cv-modal-close svg {
+  width: 18px;
+  height: 18px;
+}
+
+.cv-modal-body {
+  flex: 1;
+  overflow: hidden;
+  background: #fff;
+}
+
+.cv-pdf-viewer {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.cv-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  color: #fff;
+  text-align: center;
+  padding: 40px;
+}
+
+.cv-fallback-icon {
+  margin-bottom: 20px;
+  opacity: 0.6;
+}
+
+.cv-fallback-icon svg {
+  stroke: var(--accentColor);
+}
+
+.cv-fallback p {
+  margin: 0 0 24px 0;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.cv-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--accentColor) 0%, #b366ff 100%);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(251, 141, 255, 0.4);
+}
+
+.cv-download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(251, 141, 255, 0.5);
+}
+
+.cv-modal-footer {
+  padding: 12px 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.cv-footer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: transparent;
+  border: 1px solid rgba(251, 141, 255, 0.4);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.cv-footer-btn:hover {
+  background: rgba(251, 141, 255, 0.2);
+  border-color: rgba(251, 141, 255, 0.6);
+}
+
+.cv-footer-download {
+  background: linear-gradient(135deg, var(--accentColor) 0%, #b366ff 100%);
+  border: none;
+}
+
+.cv-footer-download:hover {
+  box-shadow: 0 4px 15px rgba(251, 141, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.cv-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 .landing-info {
   position: absolute;
   right: 50%;
@@ -257,6 +526,45 @@ h2.landing-info-h2 {
     font-size: 24px;
     line-height: 26px;
   }
+  .cv-button {
+    padding: 10px 20px;
+    font-size: 12px;
+    gap: 6px;
+    margin-top: 16px;
+  }
+  .cv-button-icon {
+    width: 16px;
+    height: 16px;
+  }
+  .cv-modal-overlay {
+    padding: 10px;
+  }
+  .cv-modal-content {
+    max-width: 100%;
+    height: 90vh;
+    border-radius: 12px;
+  }
+  .cv-modal-header {
+    padding: 12px 16px;
+  }
+  .cv-modal-header h3 {
+    font-size: 14px;
+  }
+  .cv-modal-close {
+    width: 32px;
+    height: 32px;
+  }
+  .cv-modal-close svg {
+    width: 16px;
+    height: 16px;
+  }
+  .cv-modal-footer {
+    padding: 10px 16px;
+  }
+  .cv-footer-download {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
   .landing-info {
     bottom: 30px;
     width: calc(100% - 30px);
@@ -298,6 +606,11 @@ h2.landing-info-h2 {
   .landing-intro h1 {
     font-size: 30px;
     line-height: 30px;
+  }
+  .cv-button {
+    padding: 11px 22px;
+    font-size: 13px;
+    margin-top: 20px;
   }
   .landing-info h2 {
     font-size: 35px;
@@ -345,6 +658,11 @@ h2.landing-info-h2 {
     left: auto;
     right: 66%;
     transform: translate(0%, -50%);
+    z-index: 15;
+  }
+  .cv-button {
+    z-index: 15;
+    position: relative;
   }
 
   .landing-info {
@@ -363,6 +681,7 @@ h2.landing-info-h2 {
     left: auto;
     right: 70%;
     transform: translate(0%, -50%);
+    z-index: 15;
   }
 
   .landing-info {
@@ -382,6 +701,16 @@ h2.landing-info-h2 {
   .landing-intro h1 {
     font-size: 60px;
     line-height: 55px;
+  }
+  .cv-button {
+    padding: 14px 28px;
+    font-size: 15px;
+    gap: 10px;
+    margin-top: 28px;
+  }
+  .cv-button-icon {
+    width: 22px;
+    height: 22px;
   }
   .landing-info h3 {
     font-size: 35px;

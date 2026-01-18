@@ -1,4 +1,5 @@
 import { PropsWithChildren, useState } from "react";
+import { createPortal } from "react-dom";
 import "./styles/Landing.css";
 
 const Landing = ({ children }: PropsWithChildren) => {
@@ -63,7 +64,7 @@ const Landing = ({ children }: PropsWithChildren) => {
       </div>
 
       {/* CV Modal Popup */}
-      {isModalOpen && (
+      {isModalOpen && createPortal(
         <div className="cv-modal-overlay" onClick={closeModal}>
           <div className="cv-modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="cv-modal-header">
@@ -99,7 +100,8 @@ const Landing = ({ children }: PropsWithChildren) => {
               </a>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );

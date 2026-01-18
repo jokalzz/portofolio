@@ -24,6 +24,7 @@
   filter: blur(60px);
   border-radius: 50%;
   animation: loadingCircle 5s linear infinite;
+  pointer-events: none;
 }
 .nav-fade {
   position: fixed;
@@ -97,6 +98,9 @@
   transform: translate(-50%, 100%) scale(1.4);
   opacity: 0;
 }
+.character-container {
+  pointer-events: none;
+}
 .character-model {
   height: 80%;
   height: 80vh;
@@ -108,7 +112,7 @@
   left: 50%;
   z-index: 0;
   bottom: 50px;
-  pointer-events: inherit;
+  pointer-events: none;
 }
 .character-model::after {
   content: "";
@@ -155,10 +159,11 @@
   z-index: 3;
   transform: translate(-50%, -50%);
   border-radius: 50%;
+  pointer-events: auto;
 }
 .landing-intro {
   position: absolute;
-  z-index: 9;
+  z-index: 50;
   top: 12%;
   left: 0;
 }
@@ -260,7 +265,7 @@
   background-color: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  z-index: 99999;
+  z-index: 999999999;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -648,6 +653,10 @@ h2.landing-info-h2 {
     bottom: 0;
     z-index: 11;
     position: fixed;
+    pointer-events: none;
+  }
+  .character-hover {
+    pointer-events: auto;
   }
   .character-model::after,
   .character-model::before {
@@ -658,11 +667,12 @@ h2.landing-info-h2 {
     left: auto;
     right: 66%;
     transform: translate(0%, -50%);
-    z-index: 15;
+    z-index: 50;
   }
   .cv-button {
-    z-index: 15;
-    position: relative;
+    z-index: 50;
+    pointer-events: auto !important;
+    cursor: pointer;
   }
 
   .landing-info {
@@ -681,7 +691,7 @@ h2.landing-info-h2 {
     left: auto;
     right: 70%;
     transform: translate(0%, -50%);
-    z-index: 15;
+    z-index: 50;
   }
 
   .landing-info {
